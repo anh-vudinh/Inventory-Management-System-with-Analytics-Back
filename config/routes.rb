@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :sessions
   resources :employee_users
   resources :users
   resources :company_employees
