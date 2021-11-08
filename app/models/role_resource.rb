@@ -1,0 +1,3 @@
+class RoleResource < ApplicationRecord
+
+end

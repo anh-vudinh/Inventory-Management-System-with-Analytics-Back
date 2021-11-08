@@ -1,0 +1,2 @@
+class CompanyRolesController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class RoleResourcesController < ApplicationController
+end

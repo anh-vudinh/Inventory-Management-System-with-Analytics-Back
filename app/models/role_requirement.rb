@@ -1,0 +1,3 @@
+class RoleRequirement < ApplicationRecord
+
+end
