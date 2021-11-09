@@ -1,5 +1,5 @@
 class Api::SessionsController < ApplicationController
-    skip_before_action :confirm_authentication, only: [:login]
+    skip_before_action :confirm_authentication, only: [:login, :auto_login]
 
     def login
         company = Company.find_by(name: params[:company])
@@ -27,5 +27,9 @@ class Api::SessionsController < ApplicationController
         else
             render json: { error: "Company Doesn't Exist" }, status: :unprocessable_entity
         end
+    end
+
+    def auto_login
+        render json: current_user, status: :ok
     end
 end
