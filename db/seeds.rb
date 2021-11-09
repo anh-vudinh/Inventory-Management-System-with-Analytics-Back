@@ -9,7 +9,7 @@
 comp1 = Company.create(name: "companyA", location: "address", description: "test company A", is_parent: true, parent_id: 0, company_structure: "Sole-Proprietor", company_type: "Non-profit", company_model: "Service")
 applicant1 = Applicant.create(first_name: "vu", middle_name: "t", last_name: "dinh", extra_info: "nothing", application_company: comp1.id)
 employee1 = Employee.create(first_name: "vu", middle_name: "t", last_name: "dinh")
-CompanyEmployee.create(company_id: comp1, employee_id: employee1)
+CompanyEmployee.create(company_id: comp1.id, employee_id: employee1.id)
 user1 = User.create(username: "vu", password: "vu", is_disabled: false, step_verify: false, verify_type: "email")
 EmployeeUser.create(user_id: user1.id, employee_id: employee1.id)
 
