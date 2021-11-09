@@ -1,2 +1,0 @@
-class RoleRequirementsController < ApplicationController
-end

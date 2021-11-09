@@ -1,2 +1,0 @@
-class CompanyRolesController < ApplicationController
-end
