@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     #resources :sessions
+    resources :companies
+    
     resources :employee_users
     resources :users
     resources :company_employees
@@ -12,7 +14,6 @@ Rails.application.routes.draw do
     resources :role_resources
     resources :role_requirements
     resources :roles
-    resources :companies
 
     post "/login", to: "sessions#login"
     get "/auto_login", to: "sessions#auto_login"
