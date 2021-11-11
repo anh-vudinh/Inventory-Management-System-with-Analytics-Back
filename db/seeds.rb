@@ -13,7 +13,7 @@
 # user1 = User.create(username: "vu", password: "vu", is_disabled: false, step_verify: false, verify_type: "email")
 # EmployeeUser.create(user_id: user1.id, employee_id: employee1.id)
 
-comp1 = Company.create(name: "companyC", location: "9003 SomeStreet, Pearland, TX, 77777", description: "test company description", is_parent: false, parent_id: 1, company_structure: "Partnership", company_type: "For-profit", company_model: "Manufacture")
+comp1 = Company.create(name: "123companyC", location: "9003 SomeStreet, Pearland, TX, 77777", description: "test company description", is_parent: false, parent_id: 1, company_structure: "Corporation", company_type: "Non-profit", company_model: "Manufacture")
 employee1 = Employee.find_by(first_name: "vu")
 CompanyEmployee.create(company_id: comp1.id, employee_id: employee1.id)
 

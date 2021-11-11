@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    #resources :sessions
+    resources :sessions
     resources :companies
     
     resources :employee_users
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post "/login", to: "sessions#login"
     get "/auto_login", to: "sessions#auto_login"
     get "/auth", to: "users#show"
+    get "/get_children/:id", to: "companies#get_children"
   end
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
