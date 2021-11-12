@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :role_requirements
     resources :roles
 
+    delete '/logout', to: 'sessions#destroy'
     post "/login", to: "sessions#login"
     get "/auto_login", to: "sessions#auto_login"
     get "/auth", to: "users#show"
