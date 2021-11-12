@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     get "/auto_login", to: "sessions#auto_login"
     get "/auth", to: "users#show"
     get "/get_children/:id", to: "companies#get_children"
+    get "/get_parents", to: "companies#get_parents"
+    post "/create_company", to: "companies#create"
   end
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
