@@ -32,4 +32,9 @@ class Api::SessionsController < ApplicationController
     def auto_login
         render json: current_user, status: :ok
     end
+
+    def destroy
+        session.delete :user_id
+        head :no_content
+    end
 end
