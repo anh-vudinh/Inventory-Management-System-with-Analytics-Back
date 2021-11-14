@@ -9,7 +9,7 @@ class CreateCompanies < ActiveRecord::Migration[6.1]
       t.boolean :is_active
       t.integer :parent_id
       t.string :structure
-      t.string :type
+      t.string :organization
       t.string :industry
       t.string :logo
 
