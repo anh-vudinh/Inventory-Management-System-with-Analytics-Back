@@ -16,21 +16,22 @@ class Api::CompaniesController < ApplicationController
     end
 
     def create
-        parent_company = Company.find_by(name: params[:parent_name])
-        new_company = Company.create(company_params, parent_id: parent_company.id)
-        if new_company
+        parent_company_id = Company.find_by(name: params[:parent_name]) || 0
+        formatted_address = "#{params[:street]}, #{params[:city]}, #{params[:state]}, #{params[:zipcode]}"
+        new_company = Company.create(company_params.merge(location: formatted_address, parent_id: parent_company_id))
+        if new_company.valid?
             user_employee_id = current_user.employees.first.id
             CompanyEmployee.create(company_id: new_company.id, employee_id: user_employee_id)
             EmployeeUser.create(employee_id: user_employee_id, user_id: current_user.id)
             render json: new_company, status: :created
         else
-            render json: {error: "Failed to create company: #{params[:name]}"}, status: :unprocessable_entity 
+            render json: {error: new_company.errors.full_messages}, status: :unprocessable_entity 
         end
     end
 
     private
 
     def company_params
-        params.permit(:name, :street, :city, :state, :zipcode, :established, :is_parent, :is_active, :structure, :type, :industry, :logo, :description)
+        params.permit(:name, :location, :parent_id, :established, :is_parent, :is_active, :structure, :organization, :industry, :logo, :description)
     end
 end
