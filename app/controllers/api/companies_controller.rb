@@ -24,7 +24,7 @@ class Api::CompaniesController < ApplicationController
             EmployeeUser.create(employee_id: user_employee_id, user_id: current_user.id)
             render json: new_company, status: :created
         else
-            render json: {error: "Failed to create company: #{params: name}"}, status: :unprocessable_entity 
+            render json: {error: "Failed to create company: #{params[:name]}"}, status: :unprocessable_entity 
         end
     end
 

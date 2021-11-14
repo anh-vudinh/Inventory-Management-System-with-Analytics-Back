@@ -16,7 +16,7 @@ class Api::SessionsController < ApplicationController
                             render json: { error: "Wrong Password" }, status: :unauthorized
                         end
                     else
-                        render json: { error: "No User, #{params[:username]} at #{params[:company]}" }, status: :unprocessable_entity
+                        render json: { error: "No User (#{params[:username]}) at #{params[:company]}" }, status: :unprocessable_entity
                     end
                 else
                     render json: { error: "Account Disabled" }, status: :unauthorized

@@ -11,16 +11,17 @@ structures = ["Sole Proprietorship", "Partnership", "S Corporation", "Corporatio
 organizations = ["For-Profit", "Non-Profit", "Not-For-Profit"]
 industries = ["Agriculture, forestry, hunting, and fishing", "Mining", "Utilities", "Construction", "Manufacturing", "Wholesale Trade", "Retail Trade", "Transportaion and Warehousing", "Information", "Data Processing Service", "Finance and Insurance", "Real Estate and Rental Leasing"]
 
-comp1 = Company.create(name: "coA", location: "1st seed", description: "test company A", is_parent: true, is_active: true, parent_id: 0, established: Date.today.advance(days: rand(-1000..1000)), structure: structures.sample, organization: organizations.sample, industry: industries.sample)
-applicant1 = Applicant.create(first_name: "vu", middle_name: "t", last_name: "dinh", extra_info: "nothing", application_company: comp1.id)
-Employee.create(first_name: "vu", middle_name: "t", last_name: "dinh")
-employee1 = Employee.find_by(first_name: "vu")
-user1 = User.create(username: "vu", password: "vu", is_disabled: false, step_verify: false, verify_type: "email")
-CompanyEmployee.create(company_id: comp1.id, employee_id: employee1.id)
-EmployeeUser.create(user_id: user1.id, employee_id: employee1.id)
+# comp1 = Company.create(name: "coa", location: "0001 seed, Pearland, TX, #{rand(10000..99999)}", description: "1st seed", is_parent: [true, false].sample, is_active: [true, false].sample, parent_id: rand(0..5), established: Date.today.advance(days: rand(-1000..1000)), structure: structures.sample, organization: organizations.sample, industry: industries.sample)
+# applicant1 = Applicant.create(first_name: "vu", middle_name: "t", last_name: "dinh", extra_info: "nothing", application_company: comp1.id)
+# Employee.create(first_name: "vu", middle_name: "t", last_name: "dinh")
+# employee1 = Employee.find_by(first_name: "vu")
+# user1 = User.create(username: "vu", password: "vu", is_disabled: false, step_verify: false, verify_type: "email")
+# CompanyEmployee.create(company_id: comp1.id, employee_id: employee1.id)
+# EmployeeUser.create(user_id: user1.id, employee_id: employee1.id)
 
 10.times do
-comp = Company.create(name: "co#{rand(1..25)}", location: "#{rand(1000..9999)} SomeStreet, Pearland, TX, #{rand(10000..99999)}", description: "test company description", is_parent: [true, false].sample, is_active: [true, false].sample, parent_id: [0..5].sample, established: Date.today.advance(days: rand(-1000..1000)), structure: structures.sample, organization: organizations.sample, industry: industries.sample)
+employee1 = Employee.find_by(first_name: "vu")
+comp = Company.create(name: "co#{rand(1..25)}", location: "#{rand(1000..9999)} SomeStreet, Pearland, TX, #{rand(10000..99999)}", description: "test company description", is_parent: [true, false].sample, is_active: [true, false].sample, parent_id: rand(0..5), established: Date.today.advance(days: rand(-1000..1000)), structure: structures.sample, organization: organizations.sample, industry: industries.sample)
 CompanyEmployee.create(company_id: comp.id, employee_id: employee1.id)
 end
 
