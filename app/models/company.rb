@@ -10,6 +10,11 @@ class Company < ApplicationRecord
     attribute :employees
     attribute :children
 
+    validates :name, uniqueness: true, presence: true
+    validates :structure, inclusion: {in: ["Sole Proprietorship", "Partnership", "S Corporation", "Corporation", "Limited Liability Company"]}
+    validates :type, inclusion: {in: ["For-profit", "Non-profit"]}
+    # validates :industry, inclusion: {in: []}
+
     def employees
         self.company_employees.length
     end

@@ -31,6 +31,6 @@ class Api::CompaniesController < ApplicationController
     private
 
     def company_params
-        params.permit(:name, :street, :city, :state, :zipcode, :established, :is_parent, :company_structure, :company_type, :company_model, :logo, :description)
+        params.permit(:name, :street, :city, :state, :zipcode, :established, :is_parent, :is_active, :structure, :type, :industry, :logo, :description)
     end
 end

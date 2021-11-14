@@ -1,4 +1,4 @@
 class CompanySerializer < ActiveModel::Serializer
-  attributes :id, :name, :location, :description, :is_parent, :company_structure, :company_type, :company_model, :employees, :children
+  attributes :id, :location, :established, :is_parent, :is_active, :structure, :type, :industry, :logo, :description, :employees, :children
   
 end
