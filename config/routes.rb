@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get "/get_children/:id", to: "companies#get_children"
     get "/get_parents", to: "companies#get_parents"
     post "/create_company", to: "companies#create"
+    get "/get_employees/:id", to: "employees#get_employees"
   end
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
