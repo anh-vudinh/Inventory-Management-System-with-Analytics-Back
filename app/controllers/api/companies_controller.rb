@@ -22,7 +22,7 @@ class Api::CompaniesController < ApplicationController
         else
             parent_company_id = 0
         end
-        formatted_address = "#{params[:street]}, #{params[:city]}, #{params[:state]}, #{params[:zipcode]}"
+        formatted_address = "#{params[:street] == ""? "" : "#{params[:street]}"} #{params[:city] == ""? "" : ", #{params[:city]}"} #{params[:state] == ""? "" : ", #{params[:state]}"} #{params[:street] == ""? "" : ", #{params[:street]}"}"
         new_company = Company.create(company_params.merge(location: formatted_address, parent_id: parent_company_id))
         if new_company.valid?
             user_employee_id = current_user.employees.first.id
@@ -31,6 +31,16 @@ class Api::CompaniesController < ApplicationController
             render json: new_company, status: :created
         else
             render json: {error: new_company.errors.full_messages}, status: :unprocessable_entity 
+        end
+    end
+
+    def update
+        company = Company.find_by(id: params[:id])
+        update_company = company.update(is_active: params[:is_active])
+        if update_company
+            render json: update_company, status: :ok
+        else
+            render json: {error: "Failed to Update"}, status: :unprocessable_entity
         end
     end
 

@@ -9,7 +9,7 @@ class CreateApplicants < ActiveRecord::Migration[6.1]
       t.string :street_address
       t.string :zipcode
       t.string :state
-      t.string :country
+      t.string :city
       t.string :age
       t.string :gender
       t.string :phone_number
