@@ -29,4 +29,15 @@ class Api::EmployeesController < ApplicationController
         end
     end
 
+    def transfer_employee
+        company_employee = CompanyEmployee.find_by(company_id: params[:from_company], employee_id: params[:transfer_employee])
+        possible_duplicate = Company.find_by(id: params[:to_company]).employees.find_by(id: params[:transfer_employee])
+        if possible_duplicate
+            render json: {error: "Employee Already In That Company"}, status: :unprocessable_entity
+        else
+            company_employee.update(company_id: params[:to_company])
+            render json: company_employee, status: :ok
+        end
+    end
+
 end
