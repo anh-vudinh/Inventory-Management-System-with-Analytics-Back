@@ -22,6 +22,7 @@ class Api::CompaniesController < ApplicationController
         else
             parent_company_id = 0
         end
+        
         formatted_address = "#{params[:street] == ""? "" : "#{params[:street]}"} #{params[:city] == ""? "" : ", #{params[:city]}"} #{params[:state] == ""? "" : ", #{params[:state]}"} #{params[:street] == ""? "" : ", #{params[:street]}"}"
         new_company = Company.create(company_params.merge(location: formatted_address, parent_id: parent_company_id))
         if new_company.valid?

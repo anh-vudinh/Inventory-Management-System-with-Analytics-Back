@@ -1,4 +1,5 @@
 class Api::EmployeesController < ApplicationController
+    before_action :check_can_edit, only: [:create, :transfer_employee, :duplicate_employee]
 
     def get_employees
         company = Company.find_by(id: params[:id])
@@ -8,7 +9,8 @@ class Api::EmployeesController < ApplicationController
 
     def show
         employee = Employee.find_by(id: params[:id])
-        render json: employee, status: :ok
+        company_employee = CompanyEmployee.find_by(company_id: params[:company_id], employee_id: params[:id])
+        render json: {employee: employee, company_employee: company_employee}, status: :ok
     end
 
     def create
@@ -40,4 +42,35 @@ class Api::EmployeesController < ApplicationController
         end
     end
 
+    def duplicate_employee
+        company_employee = CompanyEmployee.find_by(company_id: params[:from_company], employee_id: params[:employee])
+        possible_duplicate = Company.find_by(id: params[:to_company]).employees.find_by(id: params[:employee])
+        if possible_duplicate
+            render json: {error: "Employee Already In That Company"}, status: :unprocessable_entity
+        else
+            new_company_employee = CompanyEmployee.create(company_id: params[:to_company], employee_id: params[:employee])
+            render json: new_company_employee, status: :ok
+        end
+    end
+
+    private
+    def check_can_edit
+        if params[:company_id]
+            company = Company.find_by(id: params[:company_id])
+            if !company.is_active
+                cn = company.name
+                render json: {error: "Must Remove Lock on (#{cn})"}, status: :unprocessable_entity  
+            end
+        else
+            if params[:to_company]
+                to_company = Company.find_by(id: params[:to_company])
+                from_company = Company.find_by(id: params[:from_company])
+                if !to_company.is_active || !from_company.is_active
+                    tcn = to_company.name
+                    fcn = from_company.name
+                    render json: {error: "Must Remove Lock on either (#{fcn}) or (#{tcn})"}, status: :unprocessable_entity  
+                end
+            end
+        end
+    end
 end
