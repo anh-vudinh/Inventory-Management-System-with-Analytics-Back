@@ -35,7 +35,7 @@ class Api::EmployeesController < ApplicationController
         company_employee = CompanyEmployee.find_by(company_id: params[:from_company], employee_id: params[:transfer_employee])
         possible_duplicate = Company.find_by(id: params[:to_company]).employees.find_by(id: params[:transfer_employee])
         if possible_duplicate
-            render json: {error: "Employee Already In That Company"}, status: :unprocessable_entity
+            render json: {error: "(#{possible_duplicate.last_name},#{possible_duplicate.first_name}) Already At Company"}, status: :unprocessable_entity
         else
             company_employee.update(company_id: params[:to_company])
             render json: company_employee, status: :ok
@@ -46,7 +46,7 @@ class Api::EmployeesController < ApplicationController
         company_employee = CompanyEmployee.find_by(company_id: params[:from_company], employee_id: params[:employee])
         possible_duplicate = Company.find_by(id: params[:to_company]).employees.find_by(id: params[:employee])
         if possible_duplicate
-            render json: {error: "Employee Already In That Company"}, status: :unprocessable_entity
+            render json: {error: "(#{possible_duplicate.last_name},#{possible_duplicate.first_name}) Already At Company"}, status: :unprocessable_entity
         else
             new_company_employee = CompanyEmployee.create(company_id: params[:to_company], employee_id: params[:employee])
             render json: new_company_employee, status: :ok
